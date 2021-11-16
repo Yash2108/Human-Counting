@@ -1,0 +1,41 @@
+{% extends "traincrud/base.html" %} {% block content %}
+
+<table class="table ">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            
+            <td>Image</td> <br>
+            <td>
+            
+                <a href="{% url 'train_insert' %}" class="btn btn-success">
+                    </i> Back
+                </a>
+            </td>
+            
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for train in train_list %}
+        <tr>
+            
+            <td><img src="{{train.TrainImage.url}}" height="500" width="500"></td>
+            <td><img src="{{train.TrainImage.url}}" height="500" width="500"></td>
+            
+            <td>
+                
+                <form action="{% url 'train_delete' train.id %}" method="POST" class="d-inline" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">
+                        <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                    </button>
+                </form>
+            </td>
+        
+        
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
