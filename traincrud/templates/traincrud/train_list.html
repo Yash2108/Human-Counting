@@ -37,5 +37,47 @@
         {% endfor %}
     </tbody>
 </table>
+<table class="table ">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            
+            <td>Video</td> <br>
+            <td>
+            
+                <a href="{% url 'train_video' %}" class="btn btn-success">
+                    </i> Back
+                </a>
+            </td>
+            
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for x in all %}
+        <tr>
+            
+            <td><video class="embed-responsive embed-responsive-16by9" controls="controls" >
+                <source src="{{x.video.url}}" type="video/mp4" />
+                </video></td>
+            <td><video class="embed-responsive embed-responsive-16by9" controls="controls" >
+                <source src="{{x.video.url}}" type="video/mp4" />
+                </video></td>
+            
+            <td>
+                
+                <form action="{% url 'video_delete' x.id %}" method="POST" class="d-inline" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">
+                        <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                    </button>
+                </form>
+            </td>
+        
+        
+        </tr>
+        {% endfor %}
+        
+    </tbody>
+</table>
 
 {% endblock content %}

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Train
+from .models import Train,Video
 
 
 class Trainlog(forms.ModelForm):
@@ -13,6 +13,12 @@ class Trainlog(forms.ModelForm):
 
     def __init__(self,*args,**kwargs):
         super(Trainlog,self).__init__(*args,**kwargs)
-        
 
+class Video_form(forms.ModelForm):
+    class Meta:
+        model=Video
+        fields='__all__'
+
+    def __init__(self,*args,**kwargs):
+        super(Video_form,self).__init__(*args,**kwargs)
 

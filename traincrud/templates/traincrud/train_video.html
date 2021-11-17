@@ -1,14 +1,14 @@
 {% extends "traincrud/base.html" %} {% block content %} {% load crispy_forms_tags %}
 <form method="POST" enctype="multipart/form-data">
-    {%csrf_token%} {{log|crispy}}
+    {%csrf_token%} {{form.as_p}}
     <div class="row">
         <div class="col-md-12">
             <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fas fa-database"></i>
                 Submit</button>
-                <a href="/video" class="btn btn-success">
-                </i> Or submit a Video
-                </a></div>
-        
+                <a href="{% url 'train_insert' %}" class="btn btn-success">
+                </i> Or submit an Image
+                </a>
+        </div>
         
         
     </div>
