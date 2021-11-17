@@ -3,6 +3,7 @@ from .forms import Trainlog,Video_form
 from .models import Train,Video
 from .util_func import main
 import os
+from .pointrend import count_in_image
 
 def train_list(request):
     obj = Train.objects.all()
@@ -46,7 +47,7 @@ def train_log(request, id=0):
             print(obj.TrainImage.url)
             print(obj.OutputImage)
             # print(os.getcwd())
-            obj.OutputImage = main(os.getcwd()+obj.TrainImage.url)
+            obj.OutputImage = count_in_image(os.getcwd()+obj.TrainImage.url)
             obj.save()
             return redirect('/list')
 
