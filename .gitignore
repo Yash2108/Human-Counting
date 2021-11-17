@@ -1,1 +1,4 @@
-__pycache__
+crudcapstone/__pycache__/
+traincrud/__pycache__/
+traincrud/migrations/__pycache__/
+db.sqlite3
