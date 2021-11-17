@@ -99,7 +99,7 @@ def detectByPathImage(path, output_path):
     result_image = detect(image)
     if output_path is not None:
         cv2.imwrite(output_path, result_image)
-    cv2.waitKey(0)
+    # cv2.waitKey(0)
     cv2.destroyAllWindows()
 
 def argsParser():
@@ -111,8 +111,16 @@ def argsParser():
     args = vars(arg_parse.parse_args())
     return args
 
-if __name__ == "__main__":
+def main(imageurl):
     HOGCV = cv2.HOGDescriptor()
     HOGCV.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
-    args = argsParser()
+    # args = argsParser()
+    imagename = imageurl.split("/")[-1]
+    args = {
+        "image": imageurl,
+        "video": None,
+        "camera": "false",
+        "output": "media/images/"+imagename+"_output.png"
+    }
     humanDetector(args)
+    return "/"+args['output']
