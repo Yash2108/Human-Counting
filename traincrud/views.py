@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from .forms import Trainlog,Video_form
 from .models import Train,Video
-from .util_func import main
+# from .util_func import main
 import os
 from .pointrend import count_in_image
 
