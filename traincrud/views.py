@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from .forms import Trainlog,Video_form
 from .models import Train,Video
-# from .util_func import main
+from .util_func import main
 import os
 from .pointrend import count_in_image
 
@@ -19,7 +19,9 @@ def train_video(request):
     if request.method == "POST":
         form=Video_form(data=request.POST,files=request.FILES)
         if form.is_valid():
-            form.save()
+            obj1=form.save()
+            obj1.OutputVideo = main(os.getcwd()+obj1.video.url)
+            obj1.save()
             return redirect('/list')
     else:
         form=Video_form()

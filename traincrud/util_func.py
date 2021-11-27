@@ -111,16 +111,16 @@ def argsParser():
     args = vars(arg_parse.parse_args())
     return args
 
-def main(imageurl):
+def main(videourl):
     HOGCV = cv2.HOGDescriptor()
     HOGCV.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
     # args = argsParser()
-    imagename = imageurl.split("/")[-1]
+    videoname = videourl.split("/")[-1]
     args = {
-        "image": imageurl,
-        "video": None,
+        "image": None,
+        "video": videourl,
         "camera": "false",
-        "output": "media/images/"+imagename+"_output.png"
+        "output": "media/video/output_"+videoname
     }
     humanDetector(args)
     return "/"+args['output']
