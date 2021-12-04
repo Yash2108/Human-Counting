@@ -12,7 +12,7 @@ def train_list(request):
         "obj": obj,
         "all": all_videos
      }
-    return render(request,"traincrud/train_list.html",context)
+    return render(request,"humancounter/train_list.html",context)
 
 def train_video(request):
     all_videos = Video.objects.all()
@@ -25,7 +25,7 @@ def train_video(request):
             return redirect('/list')
     else:
         form=Video_form()
-    return render(request,'traincrud/train_video.html',{"form":form,'all':all_videos})
+    return render(request,'humancounter/train_video.html',{"form":form,'all':all_videos})
 
 def train_log(request, id=0):
     if request.method == "GET":
@@ -34,7 +34,7 @@ def train_log(request, id=0):
         else:
             train = Train.objects.get(pk=id)
             log = Trainlog(instance=train)
-        return render(request,"traincrud/train_log.html", {'log':log})
+        return render(request,"humancounter/train_log.html", {'log':log})
     else:
         if id==0:    
             log = Trainlog(request.POST, request.FILES)

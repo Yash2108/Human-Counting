@@ -1,5 +1,5 @@
-crudcapstone/__pycache__/
-traincrud/__pycache__/
-traincrud/migrations/__pycache__/
+counter/__pycache__/
+humancounter/__pycache__/
+humancounter/migrations/__pycache__/
 db.sqlite3
 media/
