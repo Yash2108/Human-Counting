@@ -10,4 +10,4 @@ class Train(models.Model):
    
 class Video(models.Model):
     video=models.FileField(upload_to="video/",validators=[file_size])
-    OutputVideo = models.CharField(max_length = 100)
+   
