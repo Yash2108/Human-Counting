@@ -7,6 +7,12 @@ Currently experimenting with 2 ML models: Pointrend (ResNet backbone) & OpenCV's
 
 ``pip install -r requirements.txt``
 
+Download the pointrend_resnet101.pkl from [here](https://drive.google.com/file/d/1NeWpWQGjj2hf_W6wDIJ9e-php9UixYp3/view?usp=sharing) and place it in `humancounter/` folder
+
+### To run the Selenium automation
+
+Please download the respective chromedriver from [this link](https://chromedriver.chromium.org/downloads)  and place it in `humancounter/` folder
+
 #### To run this on a Django Server :
 
 ``python manage.py runserver``
