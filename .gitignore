@@ -3,3 +3,5 @@ humancounter/__pycache__/
 humancounter/migrations/__pycache__/
 db.sqlite3
 media/
+humancounter/pointrend_resnet101.pkl
+humancounter/chromedriver.exe
