@@ -1,5 +1,8 @@
 from django.shortcuts import render,redirect
-from .forms import Trainlog,Video_form
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .forms import Trainlog,Video_form,CreateUserForm
 from .models import Train,Video
 from .util_func import main
 import os
@@ -13,6 +16,48 @@ def train_list(request):
         "all": all_videos
      }
     return render(request,"humancounter/train_list.html",context)
+
+def loginPage(request):
+	if request.user.is_authenticated:
+		return redirect('web')
+	else:
+		if request.method == 'POST':
+			username = request.POST.get('username')
+			password =request.POST.get('password')
+
+			user = authenticate(request, username=username, password=password)
+
+			if user is not None:
+				login(request, user)
+				return redirect('web')
+			else:
+				messages.info(request, 'Username OR password is incorrect')
+
+		context = {}
+		return render(request, 'humancounter/login.html', context)
+
+def logoutUser(request):
+	logout(request)
+	return redirect('train_insert')
+    
+def registerPage(request):
+	if request.user.is_authenticated:
+		return redirect('web')
+	else:
+		formreg = CreateUserForm()
+		if request.method == 'POST':
+			formreg = CreateUserForm(request.POST)
+			if formreg.is_valid():
+				formreg.save()
+				user = formreg.cleaned_data.get('username')
+				messages.success(request, 'Account was created for ' + user)
+
+				return redirect('web')
+			
+        
+		context = {'formreg':formreg}
+		return render(request, "humancounter/register.html", context)
+
 
 def train_video(request):
     all_videos = Video.objects.all()
@@ -62,3 +107,7 @@ def video_delete(request, id=0):
     x=Video.objects.get(pk=id)
     x.delete()
     return redirect('/list')
+
+@login_required(login_url='login')
+def train_web(request):
+    return render(request, "humancounter/train_web.html")

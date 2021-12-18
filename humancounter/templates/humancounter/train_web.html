@@ -1,0 +1,11 @@
+{% extends "humancounter/base.html" %} {% block content %}
+<style>
+    .hello-msg{
+      font-size: 18px;
+      color: rgb(24, 23, 23);
+      margin-right: 20px;
+    }
+</style>
+<span class="hello-msg">Hello, {{request.user}}</span>
+<span ><a  class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
+{% endblock content %}
