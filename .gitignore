@@ -6,3 +6,4 @@ media/
 humancounter/pointrend_resnet101.pkl
 humancounter/chromedriver.exe
 humancounter/yolov3.weights
+env/

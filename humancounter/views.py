@@ -4,9 +4,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import Trainlog,Video_form,CreateUserForm
 from .models import Train,Video
-from .util_func import main
+# from .util_func import main
+from .yolo import image_feed, video_feed
 import os
-from .pointrend import count_in_image
+# from .pointrend import count_in_image
 
 def train_list(request):
     obj = Train.objects.all()
@@ -65,7 +66,7 @@ def train_video(request):
         form=Video_form(data=request.POST,files=request.FILES)
         if form.is_valid():
             obj1=form.save()
-            obj1.OutputVideo = main(os.getcwd()+obj1.video.url)
+            obj1.OutputVideo = video_feed(os.getcwd()+obj1.video.url)
             obj1.save()
             return redirect('/list')
     else:
@@ -94,7 +95,7 @@ def train_log(request, id=0):
             print(obj.TrainImage.url)
             print(obj.OutputImage)
             # print(os.getcwd())
-            obj.OutputImage = count_in_image(os.getcwd()+obj.TrainImage.url)
+            obj.OutputImage = image_feed(os.getcwd()+obj.TrainImage.url)
             obj.save()
             return redirect('/list')
 
