@@ -83,13 +83,14 @@ def live_feed():
                 color = [int(c) for c in colors[class_ids[i]]]
                 cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
                 text = label + ':' + str(p)
-                cv2.putText(frame, text, (x, y+30),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 2)
+                #cv2.putText(frame, text, (x, y+30),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 2)
                 print("Length: ",len(boxes))
                 print("People :", p)
+            cv2.putText(frame, text, (10,40),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 2)
             if writer is None:
                 # initialize our video writer
                 fourcc = cv2.VideoWriter_fourcc(*"MJPG")
-                writer = cv2.VideoWriter("person_out1.mp4", fourcc, 30,(frame.shape[1], frame.shape[0]), True)
+                writer = cv2.VideoWriter("person_out1.mp4", fourcc, 10,(frame.shape[1], frame.shape[0]), True)
         elapsed_time = time.time() - starting_time
         fps = frame_id / elapsed_time
         print(str(round(fps, 2)))
@@ -173,13 +174,14 @@ def video_feed(video_path):
                 color = [int(c) for c in colors[class_ids[i]]]
                 cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
                 text = label + ':' + str(p)
-                cv2.putText(frame, text, (x, y+30),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 2)
-                print("Length: ",len(boxes))
+                #cv2.putText(frame, text, (x, y+30),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 2)
+                #print("Length: ",len(boxes))
                 print("People :", p)
+            cv2.putText(frame, text, (10,40),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 2)    
             if writer is None:
                 # initialize our video writer
                 fourcc = cv2.VideoWriter_fourcc(*"MJPG")
-                writer = cv2.VideoWriter("person_out1.mp4", fourcc, 30,(frame.shape[1], frame.shape[0]), True)
+                writer = cv2.VideoWriter("person_out1.mp4", fourcc, 10,(frame.shape[1], frame.shape[0]), True)
         elapsed_time = time.time() - starting_time
         fps = frame_id / elapsed_time
         print(str(round(fps, 2)))
@@ -254,12 +256,11 @@ def image_feed(image_path):
                 color = [int(c) for c in colors[class_ids[i]]]
                 cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
                 text = label + ':' + str(p)
-                cv2.putText(img, text, (x, y+30),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 2)
-                print("Length: ",len(boxes))
+                #cv2.putText(img, text, (x, y+30),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 2)
+                #print("Length: ",len(boxes))
                 print("People :", p)
+        cv2.putText(img, text, (10,40),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 2)
         cv2.imshow('image',img)
         cv2.imwrite('output.jpg',img)
         if cv2.waitKey(1) & 0xFF==ord('q'):
             cv2.destroyAllWindows()
-
-image_feed('C:/Users/sachi/Downloads/peeps.jpg')
