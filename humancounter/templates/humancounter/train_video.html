@@ -1,15 +1,15 @@
 {% extends "humancounter/base.html" %} {% block content %} {% load crispy_forms_tags %}
+<span class="d-flex justify-content-center"><a href="/web" class="btn btn-success">
+</i> Submit by webcam
+</a></span>
 <form method="POST" enctype="multipart/form-data">
     {%csrf_token%} {{form.as_p}}
     <div class="row">
-        <div class="col-md-12">
+        <div class="d-flex justify-content-start">
             <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fas fa-database"></i>
-                Submit</button>
+                Submit the Video</button>
                 <a href="{% url 'train_insert' %}" class="btn btn-success">
                 </i> Submit an Image
-                </a>
-                <a href="/web" class="btn btn-success">
-                </i> Submit by webcam
                 </a>
         </div>
         

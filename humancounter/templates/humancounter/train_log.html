@@ -1,4 +1,7 @@
 {% extends "humancounter/base.html" %} {% block content %} {% load crispy_forms_tags %}
+<span class="d-flex justify-content-center"><a href="/web" class="btn btn-success">
+</i> Submit by webcam
+</a></span>
 <form method="POST" enctype="multipart/form-data">
     {%csrf_token%} {{log|crispy}}
     <div class="row">
@@ -8,13 +11,9 @@
                 <a href="/video" class="btn btn-success">
                 </i> Submit a Video
                 </a>
-                <a href="/web" class="btn btn-success">
-                </i> Submit by webcam
-                </a>
+                
         </div>
-        
-        
-        
+        For webcam, an account is necessary.
     </div>
 </form>
 
