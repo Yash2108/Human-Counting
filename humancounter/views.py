@@ -150,9 +150,14 @@ def gen(camera):
               b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n\r\n')
 @login_required(login_url='login')
 @gzip.gzip_page
-def train_web(request):
+def train_web_cam(request):
     try:
         cam = VideoCamera()
         return StreamingHttpResponse(gen(cam), content_type="multipart/x-mixed-replace;boundary=frame")
     except:  # This is bad! replace it with proper handling
         pass
+       
+       
+@login_required(login_url='login')
+def train_web(request):
+    return render(request,"humancounter/train_web.html")

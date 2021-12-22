@@ -13,6 +13,7 @@ urlpatterns = [
     path('', views.train_log,name='train_insert'),
     path('video/', views.train_video, name='train_video'),
     path('web/',views.train_web, name="web"),
+    path('train_web_cam/',views.train_web_cam, name="webcam"),
     path('register/', views.registerPage, name="register"),
 	path('login/', views.loginPage, name="login"),  
 	path('logout/', views.logoutUser, name="logout"),
