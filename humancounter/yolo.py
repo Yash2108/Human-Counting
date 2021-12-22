@@ -3,13 +3,12 @@ import numpy as np
 import time
 import os
 
-
 net = cv2.dnn.readNet(os.getcwd()+"/humancounter/yolov3.weights", os.getcwd()+"/humancounter/yolov3.cfg")
 classes = []
 with open(os.getcwd()+"/humancounter/coco.names", "r") as f:
     classes = [line.strip() for line in f.readlines()]
 layer_names = net.getLayerNames()
-output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
+output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 colors = np.random.uniform(0, 255, size=(len(classes), 3))
 
 def live_feed(img):
@@ -18,7 +17,7 @@ def live_feed(img):
     with open(os.getcwd()+"/humancounter/coco.names", "r") as f:
         classes = [line.strip() for line in f.readlines()]
     layer_names = net.getLayerNames()
-    output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
+    output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
     colors = np.random.uniform(0, 255, size=(len(classes), 3))
     #instantiate a variable 'p' to keep count of persons
     p=0
@@ -185,7 +184,7 @@ def video_feed(video_path):
     with open(os.getcwd()+"/humancounter/coco.names", "r") as f:
         classes = [line.strip() for line in f.readlines()]
     layer_names = net.getLayerNames()
-    output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
+    output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
     colors = np.random.uniform(0, 255, size=(len(classes), 3))
 
     #load input video stream
@@ -276,14 +275,13 @@ def video_feed(video_path):
     cv2.destroyAllWindows()
     return "/media/video/output_"+video_path.split('/')[-1].split(".")[0]+".webm"
 
-
 def image_feed(image_path):
     net = cv2.dnn.readNet(os.getcwd()+"/humancounter/yolov3.weights", os.getcwd()+"/humancounter/yolov3.cfg")
     classes = []
     with open(os.getcwd()+"/humancounter/coco.names", "r") as f:
         classes = [line.strip() for line in f.readlines()]
     layer_names = net.getLayerNames()
-    output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
+    output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
     colors = np.random.uniform(0, 255, size=(len(classes), 3))
     #instantiate a variable 'p' to keep count of persons
     p=0

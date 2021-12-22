@@ -1,10 +1,28 @@
 {% extends "humancounter/base.html" %} {% block content %} {% load crispy_forms_tags %}
-<span class="d-flex justify-content-center"><a href="/web" class="btn btn-success">
-</i> Submit by webcam
-</a></span>
+
 <form method="POST" enctype="multipart/form-data">
-    {%csrf_token%} {{log|crispy}}
-    <div class="row">
+    {%csrf_token%}
+    <table>
+        <tr>
+            <td><label>Upload Image:</label></td>
+            <td>{{log.TrainImage}}</td>
+            <td>
+                <button type="submit" class="btn btn-success">
+                    Submit the Image</button>
+            </td>
+            <td>
+                <a href="/web" class="btn btn-success">
+                </i> Submit by webcam
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'train_video' %}" class="btn btn-success">
+                </i> Submit a Video
+                </a>
+            </td>
+        </tr>
+    </table>
+    <!-- <div class="row">
         <div class="col-md-12">
             <button type="submit" class="btn btn-success btn-block btn-lg" id="submit_button"><i class="fas fa-database"></i>
                 Submit</button>
@@ -12,7 +30,7 @@
                 </i> Submit a Video
                 </a>
                 
-        </div>
+        </div> -->
         For webcam, an account is necessary.
     </div>
 </form>

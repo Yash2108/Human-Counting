@@ -18,13 +18,14 @@ def train_list(request):
     all_videos = Video.objects.all()
     context = {
         "obj": obj,
-        "all": all_videos
+        "all": all_videos,
+        "logged_in":request.user.is_authenticated
      }
     return render(request,"humancounter/train_list.html",context)
 
 def loginPage(request):
 	if request.user.is_authenticated:
-		return redirect('web')
+		return redirect('web', {"logged_in":request.user.is_authenticated})
 	else:
 		if request.method == 'POST':
 			username = request.POST.get('username')
@@ -38,16 +39,16 @@ def loginPage(request):
 			else:
 				messages.info(request, 'Username OR password is incorrect')
 
-		context = {}
+		context = {"logged_in":request.user.is_authenticated}
 		return render(request, 'humancounter/login.html', context)
 
 def logoutUser(request):
 	logout(request)
-	return redirect('train_insert')
+	return render(request, 'humancounter/train_log.html', {"logged_in":request.user.is_authenticated})
     
 def registerPage(request):
 	if request.user.is_authenticated:
-		return redirect('web')
+		return redirect('web', {"logged_in":request.user.is_authenticated})
 	else:
 		formreg = CreateUserForm()
 		if request.method == 'POST':
@@ -57,10 +58,10 @@ def registerPage(request):
 				user = formreg.cleaned_data.get('username')
 				messages.success(request, 'Account was created for ' + user)
 
-				return redirect('web')
+				return redirect('web', {"logged_in":request.user.is_authenticated})
 			
         
-		context = {'formreg':formreg}
+		context = {'formreg':formreg, "logged_in":request.user.is_authenticated}
 		return render(request, "humancounter/register.html", context)
 
 
@@ -72,10 +73,12 @@ def train_video(request):
             obj1=form.save()
             obj1.OutputVideo = video_feed(os.getcwd()+obj1.video.url)
             obj1.save()
-            return redirect('/list')
+            return redirect('/list', {"logged_in":request.user.is_authenticated})
+        else:
+            print("Invalid")
     else:
         form=Video_form()
-    return render(request,'humancounter/train_video.html',{"form":form,'all':all_videos})
+    return render(request,'humancounter/train_video.html',{"form":form,'all':all_videos, "logged_in":request.user.is_authenticated})
 
 def train_log(request, id=0):
     if request.method == "GET":
@@ -84,7 +87,7 @@ def train_log(request, id=0):
         else:
             train = Train.objects.get(pk=id)
             log = Trainlog(instance=train)
-        return render(request,"humancounter/train_log.html", {'log':log})
+        return render(request,"humancounter/train_log.html", {'log':log, "logged_in":request.user.is_authenticated})
     else:
         if id==0:    
             log = Trainlog(request.POST, request.FILES)
@@ -101,17 +104,17 @@ def train_log(request, id=0):
             # print(os.getcwd())
             obj.OutputImage = image_feed(os.getcwd()+obj.TrainImage.url)
             obj.save()
-            return redirect('/list')
+            return redirect('/list', {"logged_in":request.user.is_authenticated})
 
 
 def train_delete(request, id=0):
     train = Train.objects.get(pk=id)
     train.delete()
-    return redirect('/list')
+    return redirect('/list', {"logged_in":request.user.is_authenticated})
 def video_delete(request, id=0):
     x=Video.objects.get(pk=id)
     x.delete()
-    return redirect('/list')
+    return redirect('/list', {"logged_in":request.user.is_authenticated})
 
 # @login_required(login_url='login')
 # def train_web(request):
@@ -160,4 +163,4 @@ def train_web_cam(request):
        
 @login_required(login_url='login')
 def train_web(request):
-    return render(request,"humancounter/train_web.html")
+    return render(request,"humancounter/train_web.html", {"logged_in":request.user.is_authenticated})

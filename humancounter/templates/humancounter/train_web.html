@@ -9,5 +9,12 @@
 <span class="hello-msg">Hello, {{request.user}}</span>
 <span ><a  class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
 <br><br>
+<a href="{% url 'train_insert' %}" class="btn btn-success">
+</i> Submit an Image
+</a>
+<a href="{% url 'train_video' %}" class="btn btn-success">
+</i> Submit a Video
+</a>
+<br/>
 <img src="{% url 'webcam' %}">
 {% endblock content %}

@@ -1,7 +1,7 @@
 # Capstone-2 Project
 
 Project to create a webapp which detects and counts human in images and videos.
-Currently experimenting with ~~2 ML models: Pointrend (ResNet backbone) & OpenCV's HOG descriptor~~ YOLO
+Currently experimenting with YOLO ~~2 ML models: Pointrend (ResNet backbone) & OpenCV's HOG descriptor~~
 
 #### Install the dependencies by :
 
