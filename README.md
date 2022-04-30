@@ -1,4 +1,4 @@
-# Capstone-2 Project
+# Human Counting
 
 Project to create a webapp which detects and counts human in images and videos.
 Currently experimenting with YOLO ~~2 ML models: Pointrend (ResNet backbone) & OpenCV's HOG descriptor~~
